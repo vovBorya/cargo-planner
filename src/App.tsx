@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import { connect } from 'react-redux';
+import {Route, BrowserRouter as Router} from "react-router-dom";
+import './App.scss';
+import Header from "./components/header";
+import {fetchShipments} from "./store/shipmentReducer/actions";
+import ShipmentsList from './components/shipments-list';
+import NoItemsBox from "./components/no-items-box";
+import Loader from "./components/loader";
 
-function App() {
+type Props = {
+  allShipmentsCount: number
+  fetchShipments: DispatchType
+  isLoading: boolean
+};
+
+const App: React.FC<Props> = ({isLoading, fetchShipments, allShipmentsCount}) => {
+
+  useEffect(() => {
+
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+
+      {allShipmentsCount === 0 && !isLoading
+      && <NoItemsBox title={`There are no items. \nClick "LOAD" button to get shipments`} />}
+      {isLoading && <Loader className='app__loader'/>}
+
+      <Router>
+        <ShipmentsList />
+        <Route/>
+      </Router>
     </div>
   );
+};
+
+const mapStateToProps = (state: ShipmentState) => ({
+  allShipmentsCount: state.shipments.length,
+  isLoading: state.isLoading,
+});
+
+const mapDispatchToProps = {
+  fetchShipments
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

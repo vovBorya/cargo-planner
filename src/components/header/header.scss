@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+  }
+
+  &__button {
+    display: inline-block;
+    //margin-left: 10px;
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+
+  @media screen and (max-width: 990px) {
+
+    padding: 10px;
+
+    &__buttons {
+      float: right;
+      margin-left: auto;
+      margin-top: 10px;
+    }
+
+    &__title {
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 576px){
+    &__search-panel {
+      margin-right: 0!important;
+    }
+  }
+}

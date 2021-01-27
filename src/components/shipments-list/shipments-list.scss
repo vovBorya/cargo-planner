@@ -1,0 +1,17 @@
+.shipments-list {
+
+  width: 300px;
+  padding: 20px;
+  height: 100vh;
+  overflow: auto;
+
+  &__item {
+    display: block;
+    padding: 10px;
+  }
+
+  &__highlight-text{
+    padding: 0;
+    background-color: yellow;
+  }
+}
