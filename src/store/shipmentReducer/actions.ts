@@ -2,7 +2,8 @@ import {
   FETCH_SHIPMENTS,
   FETCH_SHIPMENTS_ERROR,
   FETCH_SHIPMENTS_REQUESTED,
-  FETCH_SHIPMENTS_SUCCESS, FILTER_LIST
+  FETCH_SHIPMENTS_SUCCESS,
+  FILTER_LIST, SET_SHIPMENT_BOXES
 } from "./types";
 
 export const fetchShipments = (): ShipmentAction => ({
@@ -26,4 +27,9 @@ export const fetchShipmentsError = (err: any): ShipmentAction => ({
 export const filterList = (str: string): ShipmentAction => ({
   type: FILTER_LIST,
   payload: str
+});
+
+export const setShipmentBoxes = (id: string, boxes: string): ShipmentAction => ({
+  type: SET_SHIPMENT_BOXES,
+  payload: {id, boxes}
 });

@@ -1,4 +1,9 @@
-import {FETCH_SHIPMENTS_ERROR, FETCH_SHIPMENTS_REQUESTED, FETCH_SHIPMENTS_SUCCESS, FILTER_LIST} from "./types";
+import {
+  FETCH_SHIPMENTS_ERROR,
+  FETCH_SHIPMENTS_REQUESTED,
+  FETCH_SHIPMENTS_SUCCESS,
+  FILTER_LIST, SET_SHIPMENT_BOXES
+} from "./types";
 
 const initialState: ShipmentState = {
   shipments: [],
@@ -35,6 +40,12 @@ export const shipmentReducer = (state: ShipmentState = initialState, action: Shi
       return {
         ...state,
         tempShipments: state.shipments.filter(item => item.name.includes(filterStr))
+      };
+    }
+    case SET_SHIPMENT_BOXES: {
+      const {id, boxes} = action.payload
+      return {
+        ...state
       };
     }
     default:

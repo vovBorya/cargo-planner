@@ -11,6 +11,7 @@ const ShipmentsList: React.FC<Props> = ({shipments}) => (
   <div className='shipments-list'>
     {shipments.map(item => (
       <ShipmentItem
+        key={item.id}
         id={item.id}
         title={item.name}
       />
