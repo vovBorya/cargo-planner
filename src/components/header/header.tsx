@@ -9,7 +9,6 @@ import {
 } from '../../store/shipmentReducer/actions';
 import { saveLocalShipments } from '../../services/services';
 import Input from "../input";
-import MenuIcon from '@material-ui/icons/Menu';
 
 type HeaderProps = {
   shipments: IShipment[]
@@ -42,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({
         variant='secondary'
         onClick={() => setIsListOpen(!isListOpen)}
       >
-        <MenuIcon  />
+        <div className='header__menu-icon' />
       </Button>
 
       <div className='header__main-buttons'>
