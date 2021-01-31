@@ -31,17 +31,23 @@ const App: React.FC<Props> = ({
       <Header/>
 
       {!allShipmentsCount && !isLoading
-      && <NoItemsBox title={`There are no items. \nClick "LOAD" button to get shipments`}/>}
+      && (
+        <NoItemsBox>
+          {`There are no items. \nClick "LOAD" button to get shipments`}
+        </NoItemsBox>
+      )}
       {isLoading && <Loader className='app__loader'/>}
 
-      <div className="shipments-content">
-        <Router>
-          <ShipmentsList/>
-          <Route path='/:id?'>
-            <ShipmentPage />
-          </Route>
-        </Router>
-      </div>
+      {allShipmentsCount && (
+        <div className="shipments-content">
+          <Router>
+            <ShipmentsList/>
+            <Route path='/:id?'>
+              <ShipmentPage />
+            </Route>
+          </Router>
+        </div>
+      )}
     </div>
   );
 };

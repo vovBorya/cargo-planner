@@ -16,10 +16,8 @@ type Props = RouteComponentProps<PathParamsType> & {
 
 const ShipmentPage: React.FC<Props> = ({match, shipments}) => {
   const shipment = shipments.find(item => item.id === match.params.id);
-  if (!shipment) return <NoItemsBox title='No shipment selected'/>;
-  return (
-    <ShipmentDetails shipment={shipment} />
-  );
+  if (!shipment) return <NoItemsBox>No shipment selected</NoItemsBox>;
+  return <ShipmentDetails shipment={shipment}/>;
 };
 
 const mapStateToProps = (state: ShipmentState) => ({
