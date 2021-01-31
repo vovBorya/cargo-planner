@@ -3,7 +3,7 @@ import {
   FETCH_SHIPMENTS_ERROR,
   FETCH_SHIPMENTS_REQUESTED,
   FETCH_SHIPMENTS_SUCCESS,
-  FILTER_LIST, SET_SHIPMENT_BOXES
+  FILTER_LIST, SET_IS_LIST_OPEN, SET_SHIPMENT_BOXES
 } from "./types";
 
 export const fetchShipments = (): ShipmentAction => ({
@@ -32,4 +32,9 @@ export const filterList = (str: string): ShipmentAction => ({
 export const setShipmentBoxes = (id: string, boxes: string): ShipmentAction => ({
   type: SET_SHIPMENT_BOXES,
   payload: {id, boxes}
+});
+
+export const setIsListOpen = (val: boolean): ShipmentAction => ({
+  type: SET_IS_LIST_OPEN,
+  payload: val
 });

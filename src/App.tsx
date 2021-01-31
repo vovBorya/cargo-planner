@@ -8,10 +8,7 @@ import ShipmentsList from './components/shipments-list';
 import NoItemsBox from "./components/no-items-box";
 import Loader from "./components/loader";
 import {getLocalShipments} from "./services/services";
-import ShipmentDetails from "./components/shipemt-details/shipment-details";
 import ShipmentPage from "./components/shipment-page/shipment-page";
-
-
 
 type Props = {
   allShipmentsCount: number
@@ -27,7 +24,6 @@ const App: React.FC<Props> = ({
 
   useEffect(() => {
     fetchShipmentsSuccess(getLocalShipments());
-    console.log('getLocalShipments()', getLocalShipments());
   }, [])
 
   return (

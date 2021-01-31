@@ -2,21 +2,26 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import {connect} from "react-redux";
 import Input from "../input";
 import './shipment-details.scss';
-import {setShipmentBoxes} from '../../store/shipmentReducer/actions';
+import {
+  setIsListOpen,
+  setShipmentBoxes
+} from '../../store/shipmentReducer/actions';
 import Button from "../button";
 
 type Props = {
   shipment: IShipment
+  setIsListOpen: (val: boolean) => ShipmentAction
   setShipmentBoxes: (id: string, boxes: string) => ShipmentAction
 };
 
-const ShipmentDetails: React.FC<Props> = ({shipment, setShipmentBoxes}) => {
+const ShipmentDetails: React.FC<Props> = ({shipment, setIsListOpen, setShipmentBoxes}) => {
 
   const [boxesInputValue, setBoxesInputValue] = useState<string>('');
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     setBoxesInputValue(shipment.boxes ?? '');
+    setIsListOpen(false);
   }, [shipment.id])
 
   const getBaysNumber = (boxes: string | null): number => {
@@ -25,9 +30,11 @@ const ShipmentDetails: React.FC<Props> = ({shipment, setShipmentBoxes}) => {
   };
 
   const handleInputChange = (value: string) => {
+    const newValue = value.replace(/[A-Za-z]/i, '');
+    if (newValue === boxesInputValue) return;
     setButtonDisabled(false);
-    setBoxesInputValue(value);
-  }
+    setBoxesInputValue(newValue);
+  };
 
   return (
     <div className='shipment-details'>
@@ -57,6 +64,7 @@ const mapStateToProps = (state: ShipmentState) => ({
 });
 
 const mapDispatchToProps = {
+  setIsListOpen,
   setShipmentBoxes
 };
 

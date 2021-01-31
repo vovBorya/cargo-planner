@@ -1,9 +1,6 @@
 import shipments from '../shipments.json';
 
 export const getShipments = async (): Promise<IShipment[]> => {
-  // setTimeout(() => {
-  //   return shipments;
-  // }, 1000);
   return await new Promise((resolve) => {
     setTimeout(() => {
       resolve(shipments)
@@ -11,8 +8,7 @@ export const getShipments = async (): Promise<IShipment[]> => {
   });
 };
 
-// export const getLocalShipments = (): IShipment[] => {
-export const getLocalShipments = (): any => {
+export const getLocalShipments = (): IShipment[] => {
   return JSON.parse(localStorage.getItem("shipments") ?? '[]');
 };
 

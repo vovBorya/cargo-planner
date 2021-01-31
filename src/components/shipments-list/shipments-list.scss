@@ -4,6 +4,7 @@
   padding: 20px;
   height: 100vh;
   overflow: auto;
+  transition: .4s;
 
   &__item {
     display: block;
@@ -13,5 +14,13 @@
   &__highlight-text{
     padding: 0;
     background-color: yellow;
+  }
+
+  @media screen and (max-width: 990px) {
+    &--closed {
+      width: 0;
+      padding: 0;
+      transition: .4s;
+    }
   }
 }

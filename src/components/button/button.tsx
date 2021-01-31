@@ -1,11 +1,12 @@
-import React, {MouseEvent} from 'react';
+import React, {MouseEvent, ReactNode} from 'react';
 
 type Props = {
   variant: 'primary' | 'secondary' | 'success' | 'info' | 'warning'
   onClick?: (e: MouseEvent) => void
-  title: string | number,
+  title?: string | number,
   className?: string,
-  disabled?: boolean
+  disabled?: boolean,
+  children?: ReactNode
 };
 
 export const Button: React.FC<Props> = (props) => (
@@ -14,7 +15,7 @@ export const Button: React.FC<Props> = (props) => (
     onClick={props.onClick}
     disabled={props.disabled}
   >
-    {props.title}
+    {props.children ?? props.title}
   </button>
 );
 

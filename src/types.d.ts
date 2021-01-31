@@ -9,6 +9,7 @@ type ShipmentState = {
   shipments: IShipment[]
   isLoading: boolean,
   tempShipments: IShipment[]
+  isListOpen: boolean
 };
 
 type ShipmentAction = {
