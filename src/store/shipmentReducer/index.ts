@@ -37,7 +37,7 @@ export const shipmentReducer = (state: ShipmentState = initialState, action: Shi
       };
     }
     case FILTER_LIST: {
-      const filterStr = action.payload;
+      const filterStr = action.payload.toLowerCase();
       return {
         ...state,
         tempShipments: state.shipments.filter(item => item.name.toLowerCase().includes(filterStr)),
