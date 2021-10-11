@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import './App.scss';
-import Header from "./components/header";
+import Header from "./components/Header";
 import {fetchShipments, fetchShipmentsSuccess} from "./store/shipmentReducer/actions";
-import ShipmentsList from './components/shipments-list';
-import NoItemsBox from "./components/no-items-box";
-import Loader from "./components/loader";
+import ShipmentsList from './components/ShipmentsList';
+import NoItemsBox from "./components/NoItemsBox";
+import Loader from "./components/Loader";
 import {getLocalShipments} from "./services/services";
-import ShipmentPage from "./components/shipment-page/shipment-page";
+import ShipmentPage from "./components/ShipmentPage";
 
 type Props = {
   allShipmentsCount: number
