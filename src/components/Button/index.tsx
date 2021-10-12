@@ -1,7 +1,7 @@
 import React, { MouseEvent, ReactNode } from 'react';
 
 type Props = {
-    variant: 'primary' | 'secondary' | 'success' | 'info' | 'warning'
+    variant?: 'primary' | 'secondary' | 'success' | 'info' | 'warning'
     onClick?: (e: MouseEvent) => void
     title?: string | number,
     className?: string,
@@ -22,6 +22,7 @@ const Button: React.FC<Props> = props => (
 Button.defaultProps = {
     className: '',
     disabled: false,
+    variant: "primary"
 };
 
 export default Button;

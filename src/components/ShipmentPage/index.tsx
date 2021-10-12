@@ -11,11 +11,7 @@ type PathParamsType = {
     id: string
 };
 
-type Props = RouteComponentProps<PathParamsType> & {
-    shipments: IShipment[]
-};
-
-const ShipmentPage: React.FC<Props> = ({match}) => {
+const ShipmentPage: React.FC<RouteComponentProps<PathParamsType>> = ({match}) => {
     const shipments = useSelector(selectShipments);
 
     const shipment = shipments.find(item => item.id === match.params.id);

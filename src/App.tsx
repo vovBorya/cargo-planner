@@ -1,65 +1,54 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Route, BrowserRouter as Router} from "react-router-dom";
-import './App.scss';
+
 import Header from "./components/Header";
-import {fetchShipments, fetchShipmentsSuccess} from "./store/shipmentReducer/actions";
-import ShipmentsList from './components/ShipmentsList';
-import NoItemsBox from "./components/NoItemsBox";
 import Loader from "./components/Loader";
-import {getLocalShipments} from "./services/services";
+import NoItemsBox from "./components/NoItemsBox";
 import ShipmentPage from "./components/ShipmentPage";
+import ShipmentsList from './components/ShipmentsList';
 
-type Props = {
-  allShipmentsCount: number
-  fetchShipmentsSuccess: (shipments: IShipment[]) => void
-  isLoading: boolean
-};
+import {selectAllShipmentsCount, selectIsLoading} from "./store/shipmentReducer/selectors";
+import {fetchShipmentsSuccess} from "./store/shipmentReducer/actions";
 
-const App: React.FC<Props> = ({
-                                isLoading,
-                                fetchShipmentsSuccess,
-                                allShipmentsCount
-                              }) => {
+import './App.scss';
+import {getLocalShipments} from "./services/services";
 
-  useEffect(() => {
-    fetchShipmentsSuccess(getLocalShipments());
-  }, [])
+const App: React.FC = () => {
 
-  return (
-    <div className="app">
-      <Header/>
+    const allShipmentsCount = useSelector(selectAllShipmentsCount);
+    const isLoading = useSelector(selectIsLoading);
 
-      {!allShipmentsCount && !isLoading
-      && (
-        <NoItemsBox>
-          {`There are no items. \nClick "LOAD" button to get shipments`}
-        </NoItemsBox>
-      )}
-      {isLoading && <Loader className='app__loader'/>}
+    const dispatch = useDispatch();
 
-      {allShipmentsCount && (
-        <div className="shipments-content">
-          <Router>
-            <ShipmentsList/>
-            <Route path='/:id?'>
-              <ShipmentPage />
-            </Route>
-          </Router>
+    useEffect(() => {
+        dispatch(fetchShipmentsSuccess(getLocalShipments()));
+    }, [dispatch]);
+
+    return (
+        <div className="app">
+            <Header/>
+
+            {!allShipmentsCount && !isLoading
+            && (
+                <NoItemsBox>
+                    {`There are no items. \nClick "LOAD" button to get shipments`}
+                </NoItemsBox>
+            )}
+            {isLoading && <Loader className='app__loader'/>}
+
+            {allShipmentsCount && (
+                <div className="shipments-content">
+                    <Router>
+                        <ShipmentsList/>
+                        <Route path='/:id?'>
+                            <ShipmentPage/>
+                        </Route>
+                    </Router>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
-const mapStateToProps = (state: ShipmentState) => ({
-  allShipmentsCount: state.shipments.length,
-  isLoading: state.isLoading,
-});
-
-const mapDispatchToProps = {
-  fetchShipments,
-  fetchShipmentsSuccess
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -11,8 +11,6 @@ import {
     setShipmentBoxes
 } from '../../store/shipmentReducer/actions';
 
-import './shipment-details.scss';
-
 const Wrapper = styled.div`
     width: 100%;
     padding: 1rem 2rem;
@@ -40,7 +38,7 @@ const ShipmentDetails: React.FC<Props> = ({ shipment }) => {
     useEffect(() => {
         setBoxesInputValue(shipment.boxes ?? '');
         dispatch(setIsListOpen(false));
-    }, [shipment.id])
+    }, [shipment.id, dispatch, shipment.boxes])
 
     const handleInputChange = (value: string) => {
         const newValue = value.replace(/[A-Za-z]/i, '');

@@ -8,7 +8,7 @@ import { selectIsListOpen, selectShipments } from "../../store/shipmentReducer/s
 import './shipments-list.scss';
 
 type WrapperProps = {
-    isListOpen: boolean
+    isListOpen?: boolean
 };
 
 const Wrapper = styled.div`
@@ -19,8 +19,10 @@ const Wrapper = styled.div`
   transition: .4s;
 
   @media screen and (max-width: 990px) {
+    position: fixed;
+    background: white;
     ${(props: WrapperProps) => {
-      if (props.isListOpen) {
+      if (!props.isListOpen) {
         return `
             width: 0;
             padding: 0;
@@ -31,12 +33,7 @@ const Wrapper = styled.div`
   }
 `;
 
-type Props = {
-    shipments: IShipment[]
-    isListOpen: boolean
-};
-
-const ShipmentsList: React.FC<Props> = () => {
+const ShipmentsList: React.FC = () => {
 
     const shipments = useSelector(selectShipments);
     const isListOpen = useSelector(selectIsListOpen);
